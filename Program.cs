@@ -1,13 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddTransient<ContactRepository>();
+builder.Services.UseContactsApi();
 
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
-app.MapGet("/contacts", (ContactRepository repository) =>
-{
-    return Results.Ok(repository.Get());
-});
+app.MapContactsApi();
 
 app.Run();
